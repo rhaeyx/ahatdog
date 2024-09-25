@@ -129,36 +129,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                        ElevatedButton(
+                          onPressed: () => {Navigator.pushNamed(context, "/")},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10.0), // Rounded corners
+                              )),
                           child: Image.asset(
                             "assets/images/f.png",
                             width: 36,
                             height: 36,
                           ),
                         ),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                        ElevatedButton(
+                          onPressed: () => {Navigator.pushNamed(context, "/")},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10.0), // Rounded corners
+                              )),
                           child: Image.asset(
                             "assets/images/g.png",
                             width: 36,
                             height: 36,
                           ),
                         ),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                        ElevatedButton(
+                          onPressed: () => {Navigator.pushNamed(context, "/")},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10.0), // Rounded corners
+                              )),
                           child: Image.asset(
                             "assets/images/t.png",
                             width: 36,
@@ -177,7 +189,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 100,
               )
             ],
@@ -257,36 +269,48 @@ class _SignInScreenState extends State<SignInScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
+                      ElevatedButton(
+                        onPressed: () => {Navigator.pushNamed(context, "/")},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 16, horizontal: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Rounded corners
+                            )),
                         child: Image.asset(
                           "assets/images/f.png",
                           width: 36,
                           height: 36,
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
+                      ElevatedButton(
+                        onPressed: () => {Navigator.pushNamed(context, "/")},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 16, horizontal: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Rounded corners
+                            )),
                         child: Image.asset(
                           "assets/images/g.png",
                           width: 36,
                           height: 36,
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
+                      ElevatedButton(
+                        onPressed: () => {Navigator.pushNamed(context, "/")},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 16, horizontal: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Rounded corners
+                            )),
                         child: Image.asset(
                           "assets/images/t.png",
                           width: 36,
@@ -335,6 +359,11 @@ class HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset(
+              "assets/icon/icon.png",
+              width: 100,
+              height: 100,
+            ),
             const Text(
               "Welcome",
               style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
