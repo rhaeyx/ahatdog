@@ -1,6 +1,10 @@
-import 'package:cs3midlogin/button.dart';
-import 'package:cs3midlogin/labeled_input_box.dart';
+import 'package:cs3midlogin/home_screen.dart';
+import 'package:cs3midlogin/sign_in_screen.dart';
+import 'package:cs3midlogin/sign_up_screen.dart';
+import 'package:cs3midlogin/product_card.dart';
 import 'package:flutter/material.dart';
+
+import 'package:dio/dio.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,374 +22,124 @@ class MyApp extends StatelessWidget {
         '/': (context) => const HomeScreen(),
         '/signin': (context) => const SignInScreen(),
         '/signup': (context) => const SignUpScreen(),
+        '/products': (context) => const ProductsScreen(),
       },
     );
   }
 }
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class Product {
+  final String title;
+  final String description;
+  final num price;
+  final String imageUrl;
+  final num rating;
+  final num ratingCount;
 
-  @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
-}
+  Product({
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.imageUrl,
+    required this.rating,
+    required this.ratingCount,
+  });
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _fnameController = TextEditingController();
-  final TextEditingController _lnameController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _password2Controller = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-        backgroundColor: const Color.fromRGBO(238, 232, 234, 1),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                width: screenWidth,
-                height: 160,
-                decoration: const BoxDecoration(
-                    color: Colors.white, // Background color
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(60.0), // Set
-                    )),
-                padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-                child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "New Account",
-                        style:
-                            TextStyle(fontSize: 28, color: Colors.blueAccent),
-                      ),
-                      Text("Sign up and get started."),
-                    ]),
-              ),
-              const SizedBox(height: 40),
-              Container(
-                width: 0.80 * screenWidth,
-                child: Column(
-                  children: [
-                    LabeledInputBox(
-                      label: "Email",
-                      controller: _emailController,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    LabeledInputBox(
-                      label: "First Name",
-                      controller: _fnameController,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    LabeledInputBox(
-                      label: "Last Name",
-                      controller: _lnameController,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    LabeledInputBox(
-                      label: "Username",
-                      controller: _lnameController,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    LabeledInputBox(
-                      label: "Password",
-                      controller: _passwordController,
-                      obscureText: true,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    LabeledInputBox(
-                      label: "Confirm Password",
-                      controller: _password2Controller,
-                      obscureText: true,
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Button(
-                        text: "Sign Up",
-                        onPressed: () => {Navigator.pushNamed(context, "/")}),
-                    const SizedBox(height: 30),
-                    Text(
-                      "Forgot Password",
-                      style: TextStyle(color: Colors.blue[300]),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () => {Navigator.pushNamed(context, "/")},
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    10.0), // Rounded corners
-                              )),
-                          child: Image.asset(
-                            "assets/images/f.png",
-                            width: 36,
-                            height: 36,
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () => {Navigator.pushNamed(context, "/")},
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    10.0), // Rounded corners
-                              )),
-                          child: Image.asset(
-                            "assets/images/g.png",
-                            width: 36,
-                            height: 36,
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () => {Navigator.pushNamed(context, "/")},
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    10.0), // Rounded corners
-                              )),
-                          child: Image.asset(
-                            "assets/images/t.png",
-                            width: 36,
-                            height: 36,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 40),
-                    Button(
-                        text: "Sign In",
-                        textColor: Colors.blue,
-                        color: const Color.fromRGBO(231, 236, 249, 1),
-                        onPressed: () =>
-                            {Navigator.pushNamed(context, '/signin')}),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 100,
-              )
-            ],
-          ),
-        ));
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+        title: json['title'],
+        description: json['description'],
+        price: json['price'],
+        imageUrl: json['image'],
+        rating: json['rating']['rate'],
+        ratingCount: json['rating']['count']);
   }
 }
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class ProductsScreen extends StatefulWidget {
+  const ProductsScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<ProductsScreen> createState() => _ProductsScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class _ProductsScreenState extends State<ProductsScreen> {
+  List<Product> _products = [];
 
   @override
-  Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-        backgroundColor: const Color.fromRGBO(238, 232, 234, 1),
-        body: Column(
-          children: [
-            Container(
-              width: screenWidth,
-              height: 160,
-              decoration: const BoxDecoration(
-                  color: Colors.white, // Background color
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(60.0), // Set
-                  )),
-              padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-              child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Welcome!",
-                      style: TextStyle(fontSize: 28, color: Colors.blueAccent),
-                    ),
-                    Text("Sign in and get started."),
-                  ]),
-            ),
-            const SizedBox(height: 40),
-            Container(
-              width: 0.75 * screenWidth,
-              child: Column(
-                children: [
-                  LabeledInputBox(
-                    label: "Email",
-                    controller: _emailController,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  LabeledInputBox(
-                    label: "Password",
-                    controller: _passwordController,
-                    obscureText: true,
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Button(
-                      text: "Sign In",
-                      onPressed: () => {Navigator.pushNamed(context, "/")}),
-                  const SizedBox(height: 30),
-                  Text(
-                    "Forgot Password",
-                    style: TextStyle(color: Colors.blue[300]),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () => {Navigator.pushNamed(context, "/")},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 16, horizontal: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  10.0), // Rounded corners
-                            )),
-                        child: Image.asset(
-                          "assets/images/f.png",
-                          width: 36,
-                          height: 36,
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => {Navigator.pushNamed(context, "/")},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 16, horizontal: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  10.0), // Rounded corners
-                            )),
-                        child: Image.asset(
-                          "assets/images/g.png",
-                          width: 36,
-                          height: 36,
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => {Navigator.pushNamed(context, "/")},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 16, horizontal: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  10.0), // Rounded corners
-                            )),
-                        child: Image.asset(
-                          "assets/images/t.png",
-                          width: 36,
-                          height: 36,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 40),
-                  Button(
-                      text: "Sign Up",
-                      textColor: Colors.blue,
-                      color: const Color.fromRGBO(231, 236, 249, 1),
-                      onPressed: () =>
-                          {Navigator.pushNamed(context, '/signup')}),
-                ],
-              ),
-            )
-          ],
-        ));
+  void initState() {
+    super.initState();
+    _fetchProducts();
   }
-}
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  Future<void> _fetchProducts() async {
+    String url = 'https://fakestoreapi.com/products';
+    url = 'http://localhost:4000/products';
+    try {
+      var dio = Dio();
+      Response response = await dio.get(url); // Replace with your API endpoint
 
-  @override
-  State<HomeScreen> createState() => HomeScreenState();
-}
-
-class HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+      if (response.statusCode == 200) {
+        List data = response.data; // Assuming the data is a list of products
+        setState(() {
+          _products = data.map((json) => Product.fromJson(json)).toList();
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(245, 246, 250, 1),
-        body: Center(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              "assets/icon/icon.png",
-              width: 100,
-              height: 100,
-            ),
-            const Text(
-              "Welcome",
-              style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            Button(
-              text: "Sign In",
-              onPressed: () {
-                Navigator.pushNamed(context, '/signin');
-              },
-              textColor: Colors.white,
-            ),
-            const SizedBox(height: 20),
-            Button(
-              text: "Sign Up",
-              onPressed: () {
-                Navigator.pushNamed(context, '/signup');
-              },
-              color: Colors.white,
-              textColor: Colors.black,
-            )
-          ],
-        )));
+      backgroundColor: const Color.fromRGBO(245, 246, 250, 1),
+      body: _products.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : CardGrid(_products),
+      resizeToAvoidBottomInset: false, // set it to false
+    );
   }
+}
+
+class CardGrid extends StatelessWidget {
+  final List products;
+
+  const CardGrid(this.products);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: products.length,
+        itemBuilder: (context, index) {
+          final product = products[index];
+
+          return ProductCard(
+              imageUrl: product.imageUrl,
+              title: product.title,
+              description: product.description,
+              price: product.price,
+              rating: product.rating,
+              ratingCount: product.ratingCount,
+              buttonColor: Colors.yellowAccent);
+        });
+  }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return GridView.count(
+  //     crossAxisCount: 1,
+  //     childAspectRatio: 2 / 3,
+  //     children: products
+  //         .map((product) => ProductCard(
+  //             imageUrl: product.imageUrl,
+  //             title: product.title,
+  //             description: product.description,
+  //             price: product.price,
+  //             rating: product.rating,
+  //             ratingCount: product.ratingCount,
+  //             buttonColor: Colors.yellowAccent))
+  //         .toList(),
+  //   );
+  // }
 }
