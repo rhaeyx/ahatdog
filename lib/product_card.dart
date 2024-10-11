@@ -8,6 +8,7 @@ class ProductCard extends StatelessWidget {
   final num rating;
   final num ratingCount;
   final Color buttonColor;
+  final String category;
 
   const ProductCard(
       {super.key,
@@ -17,6 +18,7 @@ class ProductCard extends StatelessWidget {
       required this.price,
       required this.rating,
       required this.buttonColor,
+      required this.category,
       required this.ratingCount});
 
   @override
@@ -43,6 +45,12 @@ class ProductCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(height: 10),
+            FilterChip(
+              label: Text(category),
+              onSelected: (v) {},
+            ),
+            SizedBox(height: 10),
             Text(
               description,
               style: TextStyle(

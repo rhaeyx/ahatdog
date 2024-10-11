@@ -35,15 +35,16 @@ class Product {
   final String imageUrl;
   final num rating;
   final num ratingCount;
+  final String category;
 
-  Product({
-    required this.title,
-    required this.description,
-    required this.price,
-    required this.imageUrl,
-    required this.rating,
-    required this.ratingCount,
-  });
+  Product(
+      {required this.title,
+      required this.description,
+      required this.price,
+      required this.imageUrl,
+      required this.rating,
+      required this.ratingCount,
+      required this.category});
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
@@ -52,7 +53,8 @@ class Product {
         price: json['price'],
         imageUrl: json['image'],
         rating: json['rating']['rate'],
-        ratingCount: json['rating']['count']);
+        ratingCount: json['rating']['count'],
+        category: json['category']);
   }
 }
 
@@ -121,25 +123,8 @@ class CardGrid extends StatelessWidget {
               price: product.price,
               rating: product.rating,
               ratingCount: product.ratingCount,
+              category: product.category,
               buttonColor: Colors.yellowAccent);
         });
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return GridView.count(
-  //     crossAxisCount: 1,
-  //     childAspectRatio: 2 / 3,
-  //     children: products
-  //         .map((product) => ProductCard(
-  //             imageUrl: product.imageUrl,
-  //             title: product.title,
-  //             description: product.description,
-  //             price: product.price,
-  //             rating: product.rating,
-  //             ratingCount: product.ratingCount,
-  //             buttonColor: Colors.yellowAccent))
-  //         .toList(),
-  //   );
-  // }
 }
