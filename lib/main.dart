@@ -74,7 +74,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   Future<void> _fetchProducts() async {
     String url = 'https://fakestoreapi.com/products';
-    url = 'http://localhost:4000/products';
+    // url = 'http://localhost:4000/products';
     try {
       var dio = Dio();
       Response response = await dio.get(url); // Replace with your API endpoint
